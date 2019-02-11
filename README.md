@@ -1,9 +1,9 @@
 # CUDA Pathtracer
 **A physically based renderer using CUDA**
 
-![](images/sun_highres.png)
-![](images/cornell.png)
-![](images/cornell_small_light.png)
+![](images/sun_highres.jpg)
+![](images/cornell.jpg)
+![](images/cornell_small_light.jpg)
 *Scenes inspired by [Yining Karl Li's and Peter Kutz' GPU Pathtracer](https://www.yiningkarlli.com/projects/gpupathtracer.html)*
 
 ## Overview
@@ -35,13 +35,13 @@ I developed the application on a system with Ubuntu 18.04, an Nvidia GeForce GTX
 
 The editor has basic functionality for placing and transforming objects and lights in the scene, creating and assigning materials, controlling the camera viewpoint in the OpenGL viewport and starting the renderer. Objects and materials are listed in the *Scene* and *Materials* tabs respectively and can be selected for further editing or deletion. Scene changes can be made during an active render and will be reflected in the progressively updated viewport. The editor has controls for enabling and disabling caustics and light sampling as well as for setting the maximum number of bounces. Light shape visibility during rendering can be set on a per light basis.
 
-![](images/editor2.png)
+![](images/editor2.jpg)
 ![](images/magnifying.gif)
 
 ## Depth of Field
 
 The extent of the focus area can be set with aperture and focus distance controls in the GUI. The effect is achieved by sampling the camera ray origin over a disc and setting its direction so that it would intersect the ideal ray going through a pinhole opening at the focus distance.
-![](images/dof.png)
+![](images/dof.jpg)
 
 ## Stratified Sampling
 
@@ -51,21 +51,21 @@ By randomly jittering the position of an image sample within a pixel, anti-alias
 
 The renderer is capable of rendering fresnel modulated specular reflection and refraction. The rendering of caustics is a direct result of specular materials.
 
-![](images/caustics.png)
-![](images/magnifying_glass.png)
+![](images/caustics.jpg)
+![](images/magnifying_glass.jpg)
 
 
 ## Light Sampling
 
 A path tracer that only relies on random outgoing directions to shade points on surfaces with diffuse materials will produce noisy images if the light sources in the scene are small or far away from a shading point (i.e. the light source has a low probabilty of being hit by a random outgoing direction). Directly sampling the direct lighting contribution for diffuse points can increase the convergence speed of a render enormously. To enable light sampling the renderer has to sample a point on a light source and then cast a shadow ray towards that point, only adding the radiance contribution if the ray between the shading point and the point on the light source is unoccluded.
 
-![](images/four_lights_pt.png)
-![](images/four_lights.png)
+![](images/four_lights_pt.jpg)
+![](images/four_lights.jpg)
 *Approximately equal time comparison between no light sampling (top) and enabled light sampling (bottom)*
 
 The quality of the light shape sampling method can have a great effect on the noise with respect to that light source. A good sampling algorithm will only sample points on the shape which can be potentially seen from the shading point (i.e. that are not occluded by the emitter shape itself, like points on the back of a sphere are for example). For the sphere and cube emitter shape sampling I uniformly sample over the entire surface area of the shape, which is not optimal. The above comparison shows all light shapes in one scene. The areas lit by the sphere and cube lights show much higher variance than those lit by the disc and plane lights, since there is no self occlusion with the latter shapes. The performance of sphere light sampling is especially bad when the light is very close to the shading point, since in this case only a fraction of the surface is visible from the point. Still for most use cases the improvement over an image without light sampling is enourmous.
 
-![](images/sphere_light.png)
+![](images/sphere_light.jpg)
 *Light sampling with a spherical emitter. Note how areas closer to the light source resolve much less efficiently.*
 
 ## Parallel Architecture
