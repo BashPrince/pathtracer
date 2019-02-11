@@ -1,0 +1,27 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": ["source activate pyside &&",
+                        "pyside2-uic editor/ui/ui_files/mainwindow.ui > editor/ui/ui_mainwindow.py &&",
+                        "pyside2-uic editor/ui/ui_files/attributeeditor.ui > editor/ui/ui_attributeeditor.py &&",
+                        "pyside2-uic editor/ui/ui_files/materialeditor.ui > editor/ui/ui_materialeditor.py &&",
+                        "pyside2-uic editor/ui/ui_files/rendersettings_dialog.ui > editor/ui/ui_rendersettings_dialog.py &&",
+                        "cd renderer/cpp/build &&",
+                        "cmake .. -DCMAKE_CUDA_FLAGS=\"-arch=sm_61\" && make &&",
+                        "cd ../../.. &&",
+                        "python renderer/cython/setup.py build_ext -i &&",
+                        "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:renderer/cpp/lib &&",
+                        "python main.py",
+                        "source deactivate"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

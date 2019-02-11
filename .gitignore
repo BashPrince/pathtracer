@@ -1,0 +1,5 @@
+__pycache__/
+**/build
+*.so
+editor/ui/ui_*.py
+*.autosave

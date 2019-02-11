@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1500</width>
+    <height>850</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QSplitter" name="horizontalSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QWidget" name="widget_2" native="true">
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>200</y>
+          <width>191</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Viewport: Hello World!</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QSplitter" name="verticalSplitter">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="sceneTab">
+         <attribute name="title">
+          <string>Scene</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QListWidget" name="sceneListWidget"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="materialTab">
+         <attribute name="title">
+          <string>Materials</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QListWidget" name="materialListWidget"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="widget" native="true">
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>40</y>
+           <width>111</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Attribute Editor</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1500</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuNew">
+    <property name="title">
+     <string>New</string>
+    </property>
+    <addaction name="actionNewCube"/>
+    <addaction name="actionNewSphere"/>
+    <addaction name="actionNewPlane"/>
+    <addaction name="actionNewDisc"/>
+    <addaction name="separator"/>
+    <addaction name="actionNewLight"/>
+    <addaction name="separator"/>
+    <addaction name="actionNewDiffuseMaterial"/>
+    <addaction name="actionNewSpecularMaterial"/>
+   </widget>
+   <widget class="QMenu" name="menuScene">
+    <property name="title">
+     <string>Scene</string>
+    </property>
+    <addaction name="actionNew_Scene"/>
+    <addaction name="actionSave_Scene"/>
+    <addaction name="actionLoad_Scene"/>
+   </widget>
+   <addaction name="menuNew"/>
+   <addaction name="menuScene"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionRender"/>
+   <addaction name="actionRender_Settings"/>
+   <addaction name="actionSave_Image"/>
+  </widget>
+  <action name="actionRender">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Render</string>
+   </property>
+   <property name="toolTip">
+    <string>Start rendering</string>
+   </property>
+  </action>
+  <action name="actionSave_Image">
+   <property name="text">
+    <string>Save Image</string>
+   </property>
+   <property name="toolTip">
+    <string>Save an image to disk</string>
+   </property>
+  </action>
+  <action name="actionRender_Settings">
+   <property name="text">
+    <string>Render Settings</string>
+   </property>
+  </action>
+  <action name="actionNewCube">
+   <property name="text">
+    <string>Cube</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new cube</string>
+   </property>
+  </action>
+  <action name="actionNewSphere">
+   <property name="text">
+    <string>Sphere</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new sphere</string>
+   </property>
+  </action>
+  <action name="actionNewPlane">
+   <property name="text">
+    <string>Plane</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new plane</string>
+   </property>
+  </action>
+  <action name="actionNewDiffuseMaterial">
+   <property name="text">
+    <string>Diffuse Material</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new diffuse material</string>
+   </property>
+  </action>
+  <action name="actionNewDisc">
+   <property name="text">
+    <string>Disc</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new disc</string>
+   </property>
+  </action>
+  <action name="actionNewLight">
+   <property name="text">
+    <string>Light</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new light</string>
+   </property>
+  </action>
+  <action name="actionSave_Scene">
+   <property name="text">
+    <string>Save Scene</string>
+   </property>
+  </action>
+  <action name="actionLoad_Scene">
+   <property name="text">
+    <string>Load Scene</string>
+   </property>
+  </action>
+  <action name="actionNew_Scene">
+   <property name="text">
+    <string>New Scene</string>
+   </property>
+  </action>
+  <action name="actionNewSpecularMaterial">
+   <property name="text">
+    <string>Specular Material</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new specular material</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

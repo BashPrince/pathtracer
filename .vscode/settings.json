@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/stephen/anaconda3/envs/pyside/bin/python",
+    "files.associations": {
+        "thread": "cpp"
+    }
+}
