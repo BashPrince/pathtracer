@@ -199,18 +199,20 @@ bool Shape::IntersectCube(const Ray &ray, Interaction *isect, Material *mat, glm
 
     if (it0 >= 0){
         pHit = objRay(t0);
-        n[it0] = 1.0;
         ray.t = t0;
+        n[it0] = objRay.d[it0] < 0.0 ? -1.0 : 1.0;
     }
     else if (t1 < objRay.t && t1 > 0.0)
     {
         pHit = objRay(t1);
-        n[it1] = 1.0;
         ray.t = t1;
+        n[it1] = objRay.d[it1] > 0.0 ? -1.0 : 1.0;
+    }
+    else {
+        return false;
     }
 
-    if(glm::dot(objRay.d, n) > 0.0)
-        n *= -1.0;
+
     *isect = objectToWorld * Interaction(pHit, n, -objRay.d);
     *mat = material;
     *Lemit = this->Lemit;
@@ -310,17 +312,12 @@ bool Shape::PlaneOccludesRay(const Ray &ray) const {
     }
 
     n = glm::vec3(0.0, 1.0, 0.0);
-    if(indexNear == 1 && indexFar == 1) {
-
-    } else if(indexNear == 1 && glm::dot(n, objRay.d) >= 0.0) {
-
-    } else if(indexFar == 1 && glm::dot(n, objRay.d) < 0.0) {
-
-    } else {
-        return false;
-    }
+    if(indexNear == 1 && (indexFar == 1 || glm::dot(n, objRay.d) >= 0.0) ||
+       indexFar == 1 && glm::dot(n, objRay.d) < 0.0) {
+           return true;
+       }
     
-    return true;
+    return false;
 }
 
 __device__
@@ -329,7 +326,9 @@ bool Shape::CubeOccludesRay(const Ray &ray) const {
     glm::vec3 pMax(1.0, 1.0, 1.0);
     Ray objRay = worldToObject * ray;
 
+
     float t0 = 0.0, t1 = objRay.t;
+    int it0 = -1;
     for(int i = 0; i < 3; ++i) {
         float invRayDir = 1.0 / objRay.d[i];
         float tNear = (pMin[i] - objRay.o[i]) * invRayDir;
@@ -343,12 +342,16 @@ bool Shape::CubeOccludesRay(const Ray &ray) const {
 
         if(tNear > t0) {
             t0 = tNear;
+            it0 = i;
         }
         if(tFar < t1) {
             t1 = tFar;
         }
         if(t0 > t1) return false;
     }
+
+    if (!(it0 >= 0 || t1 < objRay.t && t1 > 0.0))
+        return false;
     
     return true;
 }
