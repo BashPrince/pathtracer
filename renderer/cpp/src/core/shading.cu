@@ -174,7 +174,7 @@ void diffuseKernel(int *materialRequests, const int *numMaterialRequests, Pathst
         if(useLightSampling) {
             state.Lsample = glm::vec3(0.0);
             if (numLights > 0) {
-                int lightIndex = min(int(numLights * curand_uniform(&localRandState)), numLights);
+                int lightIndex = min(int(numLights * curand_uniform(&localRandState)), numLights - 1);
                 sample = glm::vec2(curand_uniform(&localRandState), curand_uniform(&localRandState));
                 Ray shadowRay(ray.o, glm::vec3(0.0));
                 state.lightPdf = lights[lightIndex].Sample(shadowRay, state.Lsample, sample);
